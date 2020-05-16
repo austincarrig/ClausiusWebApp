@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet"> 
         <!-- Bootstrap CSS -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         rel="stylesheet"
@@ -20,21 +20,75 @@
     </head>
     <body>
 
-        <div class="">
-            <div class="">
-                <div class="canvas faded-corner-border" id="canvas-border">
-                    <canvas class="canvas" id="canvas"></canvas>
+        <div class="container-fluid">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-3">
+                    <table>
+                        <!--
+                            16*
+                            11*
+                            35*
+                            9*
+                            29*
+                        -->
+                        <tr class="table-divider">
+                            <td class="row-name">T</td>
+                            <td class="row-spacing1"></td>
+                            <td class="row-value">0.0</td>
+                            <td class="row-spacing2"></td>
+                            <td class="row-units">°C</td>
+                        </tr>
+                        <tr class="table-divider">
+                            <td class="row-name">P</td>
+                            <td class="row-spacing1"></td>
+                            <td class="row-value">0.0</td>
+                            <td class="row-spacing2"></td>
+                            <td class="row-units">kPa</td>
+                        </tr>
+                        <tr class="table-divider">
+                            <td class="row-name">v</td>
+                            <td class="row-spacing1"></td>
+                            <td class="row-value">0.0</td>
+                            <td class="row-spacing2"></td>
+                            <td class="row-units">m³/kg</td>
+                        </tr>
+                        <tr class="table-divider">
+                            <td class="row-name">u</td>
+                            <td class="row-spacing1"></td>
+                            <td class="row-value">0.0</td>
+                            <td class="row-spacing2"></td>
+                            <td class="row-units">kJ/kg</td>
+                        </tr>
+                        <tr class="table-divider">
+                            <td class="row-name">h</td>
+                            <td class="row-spacing1"></td>
+                            <td class="row-value">0.0</td>
+                            <td class="row-spacing2"></td>
+                            <td class="row-units">kJ/kg</td>
+                        </tr>
+                        <tr class="table-divider">
+                            <td class="row-name">s</td>
+                            <td class="row-spacing1"></td>
+                            <td class="row-value">0.0</td>
+                            <td class="row-spacing2"></td>
+                            <td class="row-units">kJ/kg.K</td>
+                        </tr>
+                        <tr>
+                            <td class="row-name">x</td>
+                            <td class="row-spacing1"></td>
+                            <td class="row-value">0.0</td>
+                            <td class="row-spacing2"></td>
+                            <td class="row-units">%</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-8" id>
+                    <div class="canvas faded-corner-border" id="canvas-border">
+                        <canvas class="canvas" id="canvas"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <table>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
         
         <script src="main.js" async defer></script>
     </body>

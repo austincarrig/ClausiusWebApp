@@ -1,3 +1,7 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 #canvas {
     width: 100%;
     height: 100%;
@@ -6,38 +10,57 @@
     background-size: cover;
 }
 
-.meas {
-    background-color: black;
-    width: 100px;
-    height: 100px;
-    padding: 0px;
-    border: 0px;
-    margin: 0px;
-}
-
 #canvas-border {
-    width: 800px;
-    height: 600px;
+    width: 1067px;
+    height: 800px;
 }
 
 .faded-corner-border {
     padding: 2px;
-    background: linear-gradient(135deg, rgba(0,0,0,.8), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(0,0,0,.8) 100%),
-                linear-gradient(225deg, rgba(0,0,0,.8), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(0,0,0,.8) 100%);
+    background: linear-gradient(135deg, rgba(255,165,0,.8), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(255,165,0,.8) 100%),
+                linear-gradient(225deg, rgba(255,165,0,.8), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(255,165,0,.8) 100%);
 }
 
-.orange-border {
-    border: 2px solid black;
+table {
+    margin: 10px;
+    width: 250px;
 }
 
-.blue {
-    background-color: blue;
+tr {
+    height: 36px;
+    margin: 0px;
+    padding: 0px;
 }
 
-.green {
-    background-color: green;
+.table-divider {
+    height: 38px;
+    border-bottom: 2px solid #ffa500;
 }
 
-.red {
-    background-color: red;
+td {
+    margin: 0px;
+    padding: 0px;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+td.row-name {
+    text-align: center;
+    width: 14%;
+}
+
+td.row-spacing1 {
+    width: 9%;
+}
+
+td.row-value {
+    width: 35%;
+}
+
+td.row-spacing2 {
+    width: 7%;
+}
+
+td.row-units {
+    width: 35%;
 }

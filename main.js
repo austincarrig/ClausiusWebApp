@@ -8,19 +8,15 @@ const HitmarkerLineWidth = 1.0;
 
 const orangeColor = "#ffa500"
 
-var canvas, _ctx, flag = false,
+var canvas, canvasBorder, _ctx, flag = false,
     prevX = 0,
     currX = 0,
     prevY = 0,
     currY = 0;
 
-function initCanvas() {
-    canvas.width = document.querySelector("#canvas-border").scrollWidth
-    canvas.height = document.querySelector("#canvas-border").scrollHeight
-}
-
 function initialization() {
     canvas = document.querySelector("#canvas")
+    canvasBorder = document.querySelector("#canvas-border")
 
     _ctx = canvas.getContext("2d");
 
@@ -37,17 +33,26 @@ function initialization() {
         findxy('out', event)
     }, false);
 
-    document.querySelector("#canvas").addEventListener("load", initCanvas)
-    document.querySelector("body").addEventListener("resize", initCanvas)
+    window.addEventListener("resize", resizeCanvasBorder)
+    window.addEventListener("load", resizeCanvasBorder)
+}
+
+function resizeCanvasBorder() {
+    const innerHeight = window.innerHeight;
+
+    canvasBorder.style.maxHeight = innerHeight + "px";
+    canvasBorder.style.maxWidth = (innerHeight * 4/3) + "px";
+    resizeCanvas()
+}
+
+function resizeCanvas() {
+    canvas.width = canvasBorder.scrollWidth
+    canvas.height = canvasBorder.scrollHeight
 }
 
 function findxy(res, event) {
-    initCanvas();
     if (res == 'down') {
-        prevX = currX;
-        prevY = currY;
-        currX = event.clientX - canvas.offsetLeft;
-        currY = event.clientY - canvas.offsetTop;
+        resizeCanvas();
 
         flag = true;
         
@@ -56,36 +61,24 @@ function findxy(res, event) {
     if (res == 'up' || res == "out") {
         if (flag) {
             flag = false;
+
             DrawSmallIndicator();
         }
     }
     if (res == 'move') {
         if (flag) {
-            prevX = currX;
-            prevY = currY;
-            currX = event.clientX - canvas.offsetLeft;
-            currY = event.clientY - canvas.offsetTop;
             DrawLargeIndicator();
         }
     }
 }
 
-function DrawSmallIndicator() {
-    // Remove all previously-drawn paths from the canvas
-    _ctx.clearRect(0, 0, canvas.width, canvas.height)
-    
-    // The small indicator consists of...
-
-    // ... an inner circle...
-    DrawInnerCircle(_ctx);
-
-    // ... and a small ring.
-    DrawRing(_ctx,
-             SmallOuterRadius,
-             SmallOuterLineWidth);
-}
-
 function DrawLargeIndicator() {
+    // Set new values for location
+    prevX = currX;
+    prevY = currY;
+    currX = event.clientX - canvas.getBoundingClientRect().left;
+    currY = event.clientY - canvas.getBoundingClientRect().top;
+    
     // Remove all previously-drawn paths from the canvas
     _ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -101,6 +94,21 @@ function DrawLargeIndicator() {
     
     // ... and 4 hitmarkers.
     DrawHitmarkers(_ctx);
+}
+
+function DrawSmallIndicator() {
+    // Remove all previously-drawn paths from the canvas
+    _ctx.clearRect(0, 0, canvas.width, canvas.height)
+    
+    // The small indicator consists of...
+
+    // ... an inner circle...
+    DrawInnerCircle(_ctx);
+
+    // ... and a small ring.
+    DrawRing(_ctx,
+             SmallOuterRadius,
+             SmallOuterLineWidth);
 }
 
 function DrawInnerCircle(ctx) {
