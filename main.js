@@ -14,13 +14,15 @@ var canvas, _ctx, flag = false,
     prevY = 0,
     currY = 0;
 
+function initCanvas() {
+    canvas.width = document.querySelector("#canvas-border").scrollWidth
+    canvas.height = document.querySelector("#canvas-border").scrollHeight
+}
+
 function initialization() {
     canvas = document.querySelector("#canvas")
 
     _ctx = canvas.getContext("2d");
-
-    let w = canvas.width;
-    let h = canvas.height;
 
     canvas.addEventListener("mousemove", function (event) {
         findxy('move', event)
@@ -34,9 +36,13 @@ function initialization() {
     canvas.addEventListener("mouseout", function (event) {
         findxy('out', event)
     }, false);
+
+    document.querySelector("#canvas").addEventListener("load", initCanvas)
+    document.querySelector("body").addEventListener("resize", initCanvas)
 }
 
 function findxy(res, event) {
+    initCanvas();
     if (res == 'down') {
         prevX = currX;
         prevY = currY;
@@ -48,12 +54,10 @@ function findxy(res, event) {
         DrawLargeIndicator();
     }
     if (res == 'up' || res == "out") {
-        flag = false;
-        prevX = currX;
-        prevY = currY;
-        currX = event.clientX - canvas.offsetLeft;
-        currY = event.clientY - canvas.offsetTop;
-        DrawSmallIndicator();
+        if (flag) {
+            flag = false;
+            DrawSmallIndicator();
+        }
     }
     if (res == 'move') {
         if (flag) {
