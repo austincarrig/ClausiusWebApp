@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Icon</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style type="text/css">
+            body {
+                margin: 0px;
+            }
+
+            #icon-main {
+                position: relative;
+                height: 200px;
+                width: 200px;
+                background: linear-gradient(rgb(251, 146, 49), rgb(245, 93, 65));
+            }
+
+            .app-style-border {
+                border-radius: 40px;
+                border: 0px solid transparent;
+            }
+
+            .drawing {
+                position: absolute;
+            }
+
+            #outer-ring {
+                width: 25%;
+                height: 25%;
+                top: 37.5%;
+                left: 12.5%;
+                background: radial-gradient(ellipse at center,
+                rgba(255,255,255,0.4),
+                rgba(255,255,255,0.4) 43%, 
+                rgba(255,255,255,0.0) 46%, 
+                rgba(255,255,255,0.0) 59%, 
+                rgba(255,255,255,0.4) 62%, 
+                rgba(255,255,255,0.4) 68%, 
+                rgba(255,255,255,0.0) 70.7%);
+            }
+
+            .scaling-svg-container {
+                position: relative;
+                height: 0;
+                width: 100%;
+                padding: 0;
+                padding-bottom: 100%;
+                /* override this inline for aspect ratio other than square */
+            }
+
+            .scaling-svg {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                left: 0;
+                top: 0;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="icon-main">
+            <div class="scaling-svg-container drawing">
+                <svg xmlns="http://www.w3.org/2000/svg" class="scaling-svg" viewBox="0 0 152 152">
+                    <path stroke-width="0" fill="#fff" fill-opacity="0.15"
+                        d="M0,36 C9,38 25,45 37,75 C47,104 100,150 128,152 L0,152 Z"/>
+                </svg>
+            </div>
+            <div id="outer-ring" class="drawing"></div>
+        </div>
+    </body>
+</html>
