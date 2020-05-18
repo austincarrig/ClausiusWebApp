@@ -13,6 +13,7 @@ body {
 #canvas-border {
     width: 1067px;
     height: 800px;
+    position: absolute;
 }
 
 .faded-corner-border {
@@ -21,7 +22,17 @@ body {
                 linear-gradient(225deg, rgba(255,165,0,.8), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(255,165,0,.8) 100%);
 }
 
+div#main {
+    display: flex;
+    position: relative;
+    justify-content: start;
+    align-items: center;
+}
+
+/* Lay out CSS for the displayView table */
+
 table {
+    position: relative;
     margin: 10px;
     width: 250px;
 }
@@ -63,4 +74,24 @@ td.row-spacing2 {
 
 td.row-units {
     width: 35%;
+}
+
+/*
+sm: 576px
+md: 768px
+lg: 992px
+xl: 1200px
+*/
+@media (min-width: 992px) {
+    div#main {
+        display: block;
+        align-items: center;
+        position: relative;
+    }
+
+    table {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+    }
 }

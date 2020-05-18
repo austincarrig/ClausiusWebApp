@@ -38,10 +38,10 @@ function initialization() {
 }
 
 function resizeCanvasBorder() {
-    const innerHeight = window.innerHeight;
+    const innerWidth = document.querySelector("#canvas-column").scrollWidth;
 
-    canvasBorder.style.maxHeight = innerHeight + "px";
-    canvasBorder.style.maxWidth = (innerHeight * 4/3) + "px";
+    canvasBorder.style.maxHeight = (innerWidth * 0.75) + "px";
+    canvasBorder.style.maxWidth  = innerWidth + "px";
     resizeCanvas()
 }
 

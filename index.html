@@ -19,77 +19,70 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-
-        <div class="container-fluid">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-3">
-                    <table>
-                        <!--
-                            16*
-                            11*
-                            35*
-                            9*
-                            29*
-                        -->
-                        <tr class="table-divider">
-                            <td class="row-name">T</td>
-                            <td class="row-spacing1"></td>
-                            <td class="row-value">0.0</td>
-                            <td class="row-spacing2"></td>
-                            <td class="row-units">°C</td>
-                        </tr>
-                        <tr class="table-divider">
-                            <td class="row-name">P</td>
-                            <td class="row-spacing1"></td>
-                            <td class="row-value">0.0</td>
-                            <td class="row-spacing2"></td>
-                            <td class="row-units">kPa</td>
-                        </tr>
-                        <tr class="table-divider">
-                            <td class="row-name">v</td>
-                            <td class="row-spacing1"></td>
-                            <td class="row-value">0.0</td>
-                            <td class="row-spacing2"></td>
-                            <td class="row-units">m³/kg</td>
-                        </tr>
-                        <tr class="table-divider">
-                            <td class="row-name">u</td>
-                            <td class="row-spacing1"></td>
-                            <td class="row-value">0.0</td>
-                            <td class="row-spacing2"></td>
-                            <td class="row-units">kJ/kg</td>
-                        </tr>
-                        <tr class="table-divider">
-                            <td class="row-name">h</td>
-                            <td class="row-spacing1"></td>
-                            <td class="row-value">0.0</td>
-                            <td class="row-spacing2"></td>
-                            <td class="row-units">kJ/kg</td>
-                        </tr>
-                        <tr class="table-divider">
-                            <td class="row-name">s</td>
-                            <td class="row-spacing1"></td>
-                            <td class="row-value">0.0</td>
-                            <td class="row-spacing2"></td>
-                            <td class="row-units">kJ/kg.K</td>
-                        </tr>
-                        <tr>
-                            <td class="row-name">x</td>
-                            <td class="row-spacing1"></td>
-                            <td class="row-value">0.0</td>
-                            <td class="row-spacing2"></td>
-                            <td class="row-units">%</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-8" id>
-                    <div class="canvas faded-corner-border" id="canvas-border">
-                        <canvas class="canvas" id="canvas"></canvas>
-                    </div>
-                </div>
+        <div id="main">
+            <div class="canvas faded-corner-border d-none d-lg-block" id="canvas-border">
+                <canvas class="canvas" id="canvas"></canvas>
             </div>
+            <table>
+                <!--
+                    16*
+                    11*
+                    35*
+                    9*
+                    29*
+                -->
+                <tr id="temperature" class="table-divider">
+                    <td class="row-name">T</td>
+                    <td class="row-spacing1"></td>
+                    <td class="row-value">0.0</td>
+                    <td class="row-spacing2"></td>
+                    <td class="row-units">°C</td>
+                </tr>
+                <tr id="pressure" class="table-divider">
+                    <td class="row-name">P</td>
+                    <td class="row-spacing1"></td>
+                    <td class="row-value">0.0</td>
+                    <td class="row-spacing2"></td>
+                    <td class="row-units">kPa</td>
+                </tr>
+                <tr id="specVol" class="table-divider">
+                    <td class="row-name">v</td>
+                    <td class="row-spacing1"></td>
+                    <td class="row-value">0.0</td>
+                    <td class="row-spacing2"></td>
+                    <td class="row-units">m³/kg</td>
+                </tr>
+                <tr id="intEnergy" class="table-divider">
+                    <td class="row-name">u</td>
+                    <td class="row-spacing1"></td>
+                    <td class="row-value">0.0</td>
+                    <td class="row-spacing2"></td>
+                    <td class="row-units">kJ/kg</td>
+                </tr>
+                <tr id="enthalpy" class="table-divider">
+                    <td class="row-name">h</td>
+                    <td class="row-spacing1"></td>
+                    <td class="row-value">0.0</td>
+                    <td class="row-spacing2"></td>
+                    <td class="row-units">kJ/kg</td>
+                </tr>
+                <tr id="entropy" class="table-divider">
+                    <td class="row-name">s</td>
+                    <td class="row-spacing1"></td>
+                    <td class="row-value">0.0</td>
+                    <td class="row-spacing2"></td>
+                    <td class="row-units">kJ/kg.K</td>
+                </tr>
+                <tr id="quality">
+                    <td class="row-name">x</td>
+                    <td class="row-spacing1"></td>
+                    <td class="row-value">0.0</td>
+                    <td class="row-spacing2"></td>
+                    <td class="row-units">%</td>
+                </tr>
+            </table>
         </div>
-        
+
         <script src="main.js" async defer></script>
     </body>
 </html>
