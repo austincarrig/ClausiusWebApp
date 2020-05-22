@@ -38,7 +38,7 @@ function initialization() {
 }
 
 function resizeCanvasBorder() {
-    const innerWidth = document.querySelector("#canvas-column").scrollWidth;
+    const innerWidth = document.querySelector("#canvas-border").scrollWidth;
 
     canvasBorder.style.maxHeight = (innerWidth * 0.75) + "px";
     canvasBorder.style.maxWidth  = innerWidth + "px";
@@ -46,8 +46,8 @@ function resizeCanvasBorder() {
 }
 
 function resizeCanvas() {
-    canvas.width = canvasBorder.scrollWidth
-    canvas.height = canvasBorder.scrollHeight
+    canvas.width = canvas.scrollWidth
+    canvas.height = canvas.scrollHeight
 }
 
 function findxy(res, event) {
@@ -76,8 +76,9 @@ function DrawLargeIndicator() {
     // Set new values for location
     prevX = currX;
     prevY = currY;
-    currX = event.clientX - canvas.getBoundingClientRect().left;
-    currY = event.clientY - canvas.getBoundingClientRect().top;
+
+    currX = (event.clientX - canvas.getBoundingClientRect().left);
+    currY = (event.clientY - canvas.getBoundingClientRect().top);
     
     // Remove all previously-drawn paths from the canvas
     _ctx.clearRect(0, 0, canvas.width, canvas.height)
