@@ -10,7 +10,7 @@
  * Converted from C# code 6/2/2020
  * 
  */
-
+/*
 class Solver {
     static M_Water = 0.01801528; // Molar mass of water expressed in kg/mol
     static T_CR    = 647.0;      // Critical temperature in K
@@ -74,7 +74,7 @@ class Solver {
         return temp;
     }
 }
-
+*/
 // ***************************************
 //            H2O Wagner Pruss
 // ***************************************
@@ -93,7 +93,7 @@ class Solver {
  * this product.
  * 
  */
-
+/*
 class H2OWagnerPruss
 {
     #extrapolationMaxDensity;
@@ -982,6 +982,25 @@ function Test() {
     TestRedlichKwongSolver()
     TestH2OWagnerPruss()
 }
+*/
+
+import wasmInit from "./pkg/exports.js";
+import * as wasm from "./pkg/exports.js";
+
+let lock = true
+
+const runWasm = async () => {
+  // Instantiate our wasm module
+  const rustWasm = await wasmInit("./pkg/exports_bg.wasm");
+
+  // Call the Add function export from wasm, save the result
+  let result = wasm.call_me_from_javascript();
+
+  console.log(result.get_v()); // Should output '72'
+
+  lock = false
+};
+runWasm();
 
 const InnerRadius = 6.5;
 const SmallOuterRadius = 9.0;
@@ -1010,6 +1029,10 @@ function initialization() {
     }, false);
     canvas.addEventListener("mousedown", function (event) {
         findxy('down', event)
+        // Call the Add function export from wasm, save the result
+        let result = wasm.call_me_from_javascript();
+
+        console.log(result.get_v()); // Should output '72'
     }, false);
     canvas.addEventListener("mouseup", function (event) {
         findxy('up', event)

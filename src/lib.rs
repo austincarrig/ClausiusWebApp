@@ -3,12 +3,15 @@
 use wasm_bindgen::prelude::*;
 
 mod solver;
+mod plot_point;
+
+use plot_point::PlotPoint;
 
 // This exports an add function.
 // It takes in two 32-bit integer values
 // And returns a 32-bit integer value.
 #[wasm_bindgen]
-pub fn call_me_from_javascript() -> f32 {
+pub fn call_me_from_javascript() -> PlotPoint {
     const M_WATER: f32 = solver::Solver::M_WATER; // Molar mass of water expressed in kg/mol
     const CM2M: f32    = 1.0 / 100.0;    // Conversion from centimeters to meters, 1/100
     let temp: f32    = 294.4;          // T in Kelvin
@@ -20,12 +23,17 @@ pub fn call_me_from_javascript() -> f32 {
     // Pressure output should be kPA
     let pressure: f32 = solver::Solver::calculate_pressure(specific_volume, temp);
 
-    let _temperature: f32 = solver::Solver::calculate_temperature(specific_volume, pressure);
+    let temperature: f32 = solver::Solver::calculate_temperature(specific_volume, pressure);
 
-    // expected output in kPA (26.06 is MPA)
-    // let expectedPressure: f32 = 26.06 * 1000.0;
-
-    return specific_volume;
+    PlotPoint::new(
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.0
+    )
 }
 
 // A NOT exported constant
