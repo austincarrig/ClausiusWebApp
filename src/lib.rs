@@ -26,7 +26,7 @@ pub fn call_me_from_javascript() -> PlotPoint {
     let temperature: f32 = solver::Solver::calculate_temperature(specific_volume, pressure);
 
     PlotPoint::new(
-        1.0,
+        temperature,
         1.0,
         1.0,
         0.0,
