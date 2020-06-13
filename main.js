@@ -4,9 +4,6 @@ import * as wasm from "./pkg/exports.js";
 const runWasm = async () => {
   // Instantiate our wasm module
   const rustWasm = await wasmInit("./pkg/exports_bg.wasm");
-
-  // Call the Add function export from wasm, save the result
-  let result = wasm.call_me_from_javascript();
 };
 runWasm();
 
@@ -75,43 +72,70 @@ function resizeCanvas() {
 }
 
 function TouchRegistered(res, event) {
+    // Set new values for location
+    prevX = currX;
+    prevY = currY;
+
+    // event.client{X,Y} refers to the mouse pointer location relative
+    // to the top-left corner of the entire window
+    // Offsetting it by the position of the top-left corner of the
+    // canvas results in the position of the mouse relative to the top-left
+    // of the canvas
+    currX = (event.clientX - canvas.getBoundingClientRect().left);
+    currY = (event.clientY - canvas.getBoundingClientRect().top);
+
+    // when the user clicks...
     if (res == 'down') {
+        // resize the canvas to ensure that our scale isn't off...
         resizeCanvas();
+
+        // update the display with calculated values...
+        UpdateDisplayView();
         
+        // draw the large indicator...
         DrawLargeIndicator();
 
+        // indicate that the mouse is currently clicked down...
         touchPresent = true;
     }
+
+    // when the mouse is moved...
     if (res == 'move') {
+        // if the mouse button is being pressed...
         if (touchPresent) {
+            // update the display with calculated values...
+            UpdateDisplayView();
+            
+            // draw the large indicator...
             DrawLargeIndicator();
         }
     }
+
+    // when the mouse is "unclicked"...
+    // or when the mouse leaves the bounds of the canvas...
     if (res == 'up' || res == "out") {
+        // if the mouse is/was just being pressed...
         if (touchPresent) {
+            // draw the small indicator
             DrawSmallIndicator();
 
+            // indicate that the mouse is no longer clicked down...
             touchPresent = false;
         }
     }
 }
 
-function newFunc() {
-    
-    // Call the Add function export from wasm, save the result
-    let result = wasm.call_me_from_javascript();
+function UpdateDisplayView() {
+    // "inputs": currX, currY
+    let result = wasm.calculate_thermo_properties(canvas.width,
+                                                  canvas.height,
+                                                  currX,
+                                                  currY);
 
-    console.log(result.get_t()); // Should output '72'
+    console.log(result.get_t()); // Should output '12.0'
 }
 
 function DrawLargeIndicator() {
-    // Set new values for location
-    prevX = currX;
-    prevY = currY;
-
-    currX = (event.clientX - canvas.getBoundingClientRect().left);
-    currY = (event.clientY - canvas.getBoundingClientRect().top);
-    
     // Remove all previously-drawn paths from the canvas
     _ctx.clearRect(0, 0, canvas.width, canvas.height)
 
