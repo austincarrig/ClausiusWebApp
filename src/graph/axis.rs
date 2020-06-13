@@ -17,7 +17,10 @@ pub enum ScaleType {
     Log
 }
 
-pub struct Axis;
-
-impl Axis {
+pub struct Axis {
+    pub min: f32,
+    pub max: f32,
+    pub direction: Direction,
+    pub value_type: ValueType,
+    pub scale_type: ScaleType
 }
