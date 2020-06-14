@@ -1,6 +1,8 @@
 use super::super::graph::chart::ChartType;
 use super::super::plot_point::PlotPoint;
 
+use super::superheated_region_calculator::SuperheatedRegionCalculator;
+
 pub struct ThermodynamicCalculator;
 impl ThermodynamicCalculator {
     // Critical temperature of water (C)
@@ -57,8 +59,8 @@ impl ThermodynamicCalculator {
     fn calculate_superheated(temperature: f32,
                              entropy: f32) -> PlotPoint
     {
-        let pressure = -1.0;//SuperheatedRegionCalculator.CalculatePressure(temperature,
-                                                                        //entropy);
+        let pressure = SuperheatedRegionCalculator::calculate_pressure(temperature,
+                                                                       entropy);
 
         let temperature_kelvin = temperature + 273.15; // temperature (C -> K)
         let pressure_mpa = pressure / 1000.0; // pressure (kPA -> MPa)
