@@ -5,12 +5,13 @@
 // Import the wasm-bindgen crate. 
 use wasm_bindgen::prelude::*;
 
-mod solver;
 mod plot_point;
 mod graph;
+mod calculator;
 
 use graph::chart::{Chart, ChartType};
 use plot_point::PlotPoint;
+use calculator::thermodynamic_calculator::ThermodynamicCalculator;
 
 // This exports an add function.
 // It takes in two 32-bit integer values
@@ -29,15 +30,9 @@ pub fn calculate_thermo_properties(canvas_width: f32,
     let x_value = chart.x_axis.min + x_scale * canvas_pos_x;
     let y_value = chart.y_axis.min + y_scale * (canvas_height - canvas_pos_y);
 
-    PlotPoint::new(
-        y_value,
-        -1.0,
-        -1.0,
-        -1.0,
-        -1.0,
-        x_value,
-        -1.0
-    )
+    ThermodynamicCalculator::calculate(x_value,
+                                       y_value,
+                                       ChartType::Ts)
 }
 
 
