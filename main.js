@@ -126,13 +126,18 @@ function TouchRegistered(res, event) {
 }
 
 function UpdateDisplayView() {
-    // "inputs": currX, currY
     let result = wasm.calculate_thermo_properties(canvas.width,
                                                   canvas.height,
                                                   currX,
                                                   currY);
 
-    console.log(result.get_t()); // Should output '12.0'
+    console.log(result.get_t());
+    console.log(result.get_p());
+    console.log(result.get_v());
+    console.log(result.get_u());
+    console.log(result.get_h());
+    console.log(result.get_s());
+    console.log(result.get_x());
 }
 
 function DrawLargeIndicator() {

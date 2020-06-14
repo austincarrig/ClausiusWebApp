@@ -9,6 +9,7 @@ mod solver;
 mod plot_point;
 mod graph;
 
+use graph::chart::{Chart, ChartType};
 use plot_point::PlotPoint;
 
 // This exports an add function.
@@ -18,15 +19,23 @@ use plot_point::PlotPoint;
 pub fn calculate_thermo_properties(canvas_width: f32,
                                    canvas_height: f32,
                                    canvas_pos_x: f32,
-                                   canvas_pos_y: f32) -> PlotPoint {
-    
+                                   canvas_pos_y: f32) -> PlotPoint
+{
+    let chart = Chart::new(ChartType::Ts);
+
+    let x_scale = (chart.x_axis.max - chart.x_axis.min) / canvas_width;
+    let y_scale = (chart.y_axis.max - chart.y_axis.min) / canvas_height;
+
+    let x_value = chart.x_axis.min + x_scale * canvas_pos_x;
+    let y_value = chart.y_axis.min + y_scale * (canvas_height - canvas_pos_y);
+
     PlotPoint::new(
-        12.0,
-        1.0,
-        1.0,
-        0.0,
-        0.0,
-        0.0,
+        y_value,
+        -1.0,
+        -1.0,
+        -1.0,
+        -1.0,
+        x_value,
         -1.0
     )
 }
