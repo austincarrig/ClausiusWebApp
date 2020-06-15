@@ -2,6 +2,8 @@ use super::super::graph::chart::ChartType;
 use super::super::plot_point::PlotPoint;
 
 use super::superheated_region_calculator::SuperheatedRegionCalculator;
+use super::saturated_region_line::SaturatedRegionLine;
+use super::h2o_wagner_pruss::H2OWagnerPruss;
 
 pub struct ThermodynamicCalculator;
 impl ThermodynamicCalculator {
@@ -47,11 +49,35 @@ impl ThermodynamicCalculator {
         {
             if clamped_temp == ThermodynamicCalculator::T_CRITICAL
             {
-                panic!("AHH")
+                PlotPoint::new(
+                    clamped_temp,
+                    -1.0,
+                    -1.0,
+                    -1.0,
+                    -1.0,
+                    entropy,
+                    -1.0
+                )
             }
             else
             {
-                panic!("AH")
+                let sat_region_line = SaturatedRegionLine::new(temperature);
+
+                if entropy < sat_region_line.get_s_f()
+                {
+                    ThermodynamicCalculator::calculate_compressed(sat_region_line,
+                                                                  entropy)
+                }
+                else if entropy > sat_region_line.get_s_f() && entropy < sat_region_line.get_s_g()
+                {
+                    ThermodynamicCalculator::calculate_saturated(sat_region_line,
+                                                                 entropy)
+                }
+                else
+                {
+                    ThermodynamicCalculator::calculate_superheated(clamped_temp,
+                                                                   entropy)
+                }
             }
         }
     }
@@ -65,18 +91,17 @@ impl ThermodynamicCalculator {
         let temperature_kelvin = temperature + 273.15; // temperature (C -> K)
         let pressure_mpa = pressure / 1000.0; // pressure (kPA -> MPa)
 
-        // H2OWagnerPruss wagPruss = H2OWagnerPruss.Instance;
-
-        let density = -1.0; //wagPruss.CalculateDensity(temperatureKelvin,
-                                                   //pressureMPa);
+        let density = H2OWagnerPruss::calculate_density(temperature_kelvin,
+                                                        pressure_mpa);
 
         let spec_volume = 1.0 / density;
 
-        let int_energy = -1.0; //wagPruss.CalculateInternalEnergy(temperatureKelvin,
-                                                            //density);
+        let int_energy = H2OWagnerPruss::calculate_internal_energy(temperature_kelvin,
+                                                                   density);
 
-        let enthalpy = -1.0; //wagPruss.CalculateEnthalpy(temperatureKelvin,
-                                                     //density);
+        let enthalpy = H2OWagnerPruss::calculate_enthalpy_with_u(temperature_kelvin,
+                                                                 density,
+                                                                 int_energy);
 
         PlotPoint::new(
             temperature,
@@ -86,6 +111,40 @@ impl ThermodynamicCalculator {
             enthalpy,
             entropy,
             -1.0
+        )
+    }
+
+    fn calculate_compressed(sat_region_line: SaturatedRegionLine,
+                            entropy: f32) -> PlotPoint
+    {
+        PlotPoint::new(
+            sat_region_line.get_t(),
+            sat_region_line.get_p(),
+            sat_region_line.get_v_f(),
+            sat_region_line.get_u_f(),
+            sat_region_line.get_h_f(),
+            entropy,
+            -1.0
+        )
+    }
+
+    fn calculate_saturated(sat_region_line: SaturatedRegionLine,
+                           entropy: f32) -> PlotPoint
+    {
+        let pressure    = sat_region_line.get_p();
+        let quality     = (entropy - sat_region_line.get_s_f()) / (sat_region_line.get_s_g() - sat_region_line.get_s_f());
+        let spec_volume = sat_region_line.get_v_f() + quality * (sat_region_line.get_v_g() - sat_region_line.get_v_f());
+        let int_energy  = sat_region_line.get_u_f() + quality * (sat_region_line.get_u_g() - sat_region_line.get_u_f());
+        let enthalpy    = sat_region_line.get_h_f() + quality * (sat_region_line.get_h_g() - sat_region_line.get_h_f());
+
+        PlotPoint::new(
+            sat_region_line.get_t(),
+            pressure,
+            spec_volume,
+            int_energy,
+            enthalpy,
+            entropy,
+            quality * 100.0
         )
     }
 }
