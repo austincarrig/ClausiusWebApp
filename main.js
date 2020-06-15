@@ -97,6 +97,8 @@ function TouchRegistered(res, event) {
 
         // indicate that the mouse is currently clicked down...
         touchPresent = true;
+
+        canvas.classList.add("hide-cursor")
     }
 
     // when the mouse is moved...
@@ -121,6 +123,8 @@ function TouchRegistered(res, event) {
 
             // indicate that the mouse is no longer clicked down...
             touchPresent = false;
+
+            canvas.classList.remove("hide-cursor")
         }
     }
 }
