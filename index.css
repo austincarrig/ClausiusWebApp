@@ -18,12 +18,17 @@ body {
 
 .faded-corner-border {
     padding: 2px;
+    padding-right: 2.75px;
     background: linear-gradient(135deg, rgba(255,165,0,.8), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(255,165,0,.8) 100%),
                 linear-gradient(225deg, rgba(255,165,0,.8), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(255,165,0,.8) 100%);
 }
 
 .hide-cursor {
     cursor: none;
+}
+
+.hidden {
+    display: none;
 }
 
 div#main {
@@ -34,11 +39,20 @@ div#main {
 }
 
 /* Lay out CSS for the displayView table */
-
+/*
+.data-table {
+    border: 1px solid blue;
+}
+*/
 table {
     position: relative;
     margin: 10px;
     width: 250px;
+    /*border: 1px solid red;*/
+}
+
+.data-table h1 {
+    height: 40px;
 }
 
 tr {
@@ -49,7 +63,7 @@ tr {
 
 .table-divider {
     height: 38px;
-    border-bottom: 2px solid #ffa500;
+    border-top: 2px solid #ffa500;
 }
 
 td {

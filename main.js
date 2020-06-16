@@ -135,13 +135,22 @@ function UpdateDisplayView() {
                                                   currX,
                                                   currY);
 
-    console.log(result.get_t());
-    console.log(result.get_p());
-    console.log(result.get_v());
-    console.log(result.get_u());
-    console.log(result.get_h());
-    console.log(result.get_s());
-    console.log(result.get_x());
+    document.querySelector("#temperature .row-value").innerText = result.get_t().toFixed(2)
+    document.querySelector("#pressure .row-value").innerText    = result.get_p().toFixed(2)
+    document.querySelector("#specVol .row-value").innerText     = result.get_v().toFixed(4)
+    document.querySelector("#intEnergy .row-value").innerText   = result.get_u().toFixed(2)
+    document.querySelector("#enthalpy .row-value").innerText    = result.get_h().toFixed(2)
+    document.querySelector("#entropy .row-value").innerText     = result.get_s().toFixed(2)
+    document.querySelector("#quality .row-value").innerText     = result.get_x().toFixed(2)
+
+    if (result.get_x() < 0.0)
+    {
+        document.querySelector("#quality").classList.add("hidden")
+    }
+    else
+    {
+        document.querySelector("#quality").classList.remove("hidden")
+    }
 }
 
 function DrawLargeIndicator() {
