@@ -1,12 +1,17 @@
 use super::*;
 use super::super::H2OWagnerPruss;
 
+extern crate wasm_bindgen_test;
+use wasm_bindgen_test::*;
+wasm_bindgen_test::wasm_bindgen_test_configure!(run_in_browser);
+
 //const TOP_LEFT_TS_DIAGRAM_PHI_R_TAU: f32 = -1.525597801637211;
 //const TOP_RIGHT_TS_DIAGRAM_PHI_R_TAU: f32 = -0.001659790043634;
 //const BOTTOM_RIGHT_TS_DIAGRAM_PHI_R_TAU: f32 = -0.001527936462799;
 const SUPERHEATED_POINT_1_PHI_R_TAU: f32 = -0.082931693508678;
 
 #[test]
+#[wasm_bindgen_test]
 fn superheated_point_1()
 {
     test_phi_r_tau(SUPERHEATED_POINT_1_T,

@@ -75,3 +75,6 @@ impl SuperheatedRegionCalculator {
         }
     }
 }
+
+#[cfg(test)]
+mod tests;

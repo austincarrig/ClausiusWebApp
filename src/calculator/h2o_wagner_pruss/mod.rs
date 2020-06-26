@@ -196,38 +196,38 @@ impl H2OWagnerPruss
     {
         let mut phi_r_delta = 0.0;
 
-        let tau = H2OWagnerPruss::calculate_tau(temperature);
-        let delta = H2OWagnerPruss::calculate_delta(density);
+        let tau = H2OWagnerPruss::calculate_tau(temperature) as f64;
+        let delta = H2OWagnerPruss::calculate_delta(density) as f64;
 
         for i in 1..=7
         {
-            phi_r_delta += Constants::n[i] * Constants::d[i] * f32::powf(delta, Constants::d[i] - 1.0) * f32::powf(tau, Constants::t[i]);
+            phi_r_delta += Constants::n[i] as f64 * Constants::d[i] as f64 * f64::powf(delta, Constants::d[i] as f64 - 1.0) * f64::powf(tau, Constants::t[i] as f64);
         }
         for i in 8..=51
         {
-            phi_r_delta += Constants::n[i] * f32::exp(-f32::powf(delta, Constants::c[i])) * (f32::powf(delta, Constants::d[i] - 1.0) * f32::powf(tau, Constants::t[i]) * (Constants::d[i] - Constants::c[i] * f32::powf(delta, Constants::c[i])));
+            phi_r_delta += Constants::n[i] as f64 * f64::exp(-f64::powf(delta, Constants::c[i] as f64)) * (f64::powf(delta, Constants::d[i] as f64 - 1.0) * f64::powf(tau, Constants::t[i] as f64) * (Constants::d[i] as f64 - Constants::c[i] as f64 * f64::powf(delta, Constants::c[i] as f64)));
         }
         for i in 52..=54
         {
-            phi_r_delta += Constants::n[i] * f32::powf(delta, Constants::d[i]) * f32::powf(tau, Constants::t[i]) * f32::exp(-Constants::alpha[i] * f32::powf(delta - Constants::epsilon[i], 2.0) - Constants::beta[i] * f32::powf(tau - Constants::gamma[i], 2.0))
-            * (Constants::d[i] / delta - 2.0 * Constants::alpha[i] * (delta - Constants::epsilon[i]));
+            phi_r_delta += Constants::n[i] as f64 * f64::powf(delta, Constants::d[i] as f64) * f64::powf(tau, Constants::t[i] as f64) * f64::exp(-Constants::alpha[i] as f64 * f64::powf(delta - Constants::epsilon[i] as f64, 2.0) - Constants::beta[i] as f64 * f64::powf(tau - Constants::gamma[i] as f64, 2.0))
+            * (Constants::d[i] as f64 / delta - 2.0 * Constants::alpha[i] as f64 * (delta - Constants::epsilon[i] as f64));
         }
         for i in 55..=56
         {
             // definition of theta, gdelta, psi
-            let theta = (1.0 - tau) + Constants::A[i] * f32::powf((delta - 1.0) * (delta - 1.0), 1.0 / (2.0 * Constants::beta[i]));
-            let gdelta = theta * theta + Constants::B[i] * f32::powf((delta - 1.0) * (delta - 1.0), Constants::a[i]);
-            let psi = f32::exp(-Constants::C[i] * (delta - 1.0) * (delta - 1.0) - Constants::D[i] * (tau - 1.0) * (tau - 1.0));
+            let theta = (1.0 - tau) + Constants::A[i] as f64 * f64::powf((delta - 1.0) * (delta - 1.0), 1.0 / (2.0 * Constants::beta[i] as f64));
+            let gdelta = theta * theta + Constants::B[i] as f64 * f64::powf((delta - 1.0) * (delta - 1.0), Constants::a[i] as f64);
+            let psi = f64::exp(-Constants::C[i] as f64 * (delta - 1.0) * (delta - 1.0) - Constants::D[i] as f64 * (tau - 1.0) * (tau - 1.0));
             // definition of gdelta_delta, gdelta_bi_delta
-            let gdelta_delta = (delta - 1.0) * (Constants::A[i] * theta * 2.0 / Constants::beta[i] * f32::powf((delta - 1.0) * (delta - 1.0), 1.0 / (2.0 * Constants::beta[i]) - 1.0)
-                            + 2.0 * Constants::B[i] * Constants::a[i] * f32::powf((delta - 1.0) * (delta - 1.0), Constants::a[i] - 1.0));
-            let gdelta_bi_delta = Constants::b[i] * f32::powf(gdelta, Constants::b[i] - 1.0) * gdelta_delta;
+            let gdelta_delta = (delta - 1.0) * (Constants::A[i] as f64 * theta * 2.0 / Constants::beta[i] as f64 * f64::powf((delta - 1.0) * (delta - 1.0), 1.0 / (2.0 * Constants::beta[i] as f64) - 1.0)
+                            + 2.0 * Constants::B[i] as f64 * Constants::a[i] as f64 * f64::powf((delta - 1.0) * (delta - 1.0), Constants::a[i] as f64 - 1.0));
+            let gdelta_bi_delta = Constants::b[i] as f64 * f64::powf(gdelta, Constants::b[i] as f64 - 1.0) * gdelta_delta;
             // definition of psi_delta
-            let psi_delta = -2.0 * Constants::C[i] * (delta - 1.0) * psi;
-            phi_r_delta += Constants::n[i] * (f32::powf(gdelta, Constants::b[i]) * (psi + delta * psi_delta) + gdelta_bi_delta * delta * psi);
+            let psi_delta = -2.0 * Constants::C[i] as f64 * (delta - 1.0) * psi;
+            phi_r_delta += Constants::n[i] as f64 * (f64::powf(gdelta, Constants::b[i] as f64) * (psi + delta * psi_delta) + gdelta_bi_delta * delta * psi);
         }
 
-        phi_r_delta
+        phi_r_delta as f32
     }
 
     fn calculate_phi_r_delta_delta(temperature: f32,
