@@ -31,3 +31,14 @@ fn clamp_middle()
     let clamped_val = SuperheatedRegionCalculator::clamp_temperature(mid_val);
     assert_eq!(clamped_val, mid_val)
 }
+
+#[test]
+#[wasm_bindgen_test]
+fn calculate_pressure() {
+    const SUPERHEATED_POINT_1_T: f32 = 843.16003 - 273.15; // C
+    const SUPERHEATED_POINT_1_S: f32 = 7.316159284557199; // kJ / kg . K
+    const SUPERHEATED_POINT_1_P: f32 = 3796.165343768067; // kPa
+
+    let calc = SuperheatedRegionCalculator::calculate_pressure(SUPERHEATED_POINT_1_T, SUPERHEATED_POINT_1_S);
+    assert!((calc - SUPERHEATED_POINT_1_P) < std::f32::EPSILON)
+}
