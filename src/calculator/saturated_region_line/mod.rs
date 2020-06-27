@@ -131,3 +131,6 @@ impl SaturatedRegionLine
         low + weight * (high - low)
     }
 }
+
+#[cfg(test)]
+mod tests;
