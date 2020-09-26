@@ -15,4 +15,5 @@ script:
   - cargo test
 
   - wasm-pack test --firefox --headless
+  allow_failures:
   - wasm-pack test --chrome  --headless
