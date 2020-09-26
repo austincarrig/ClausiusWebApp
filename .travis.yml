@@ -12,8 +12,7 @@ script:
 
   # this will test the non wasm targets if your crate has those, otherwise remove this line.
   #
+  - cargo build
   - cargo test
-
-  - wasm-pack test --firefox --headless
-  allow_failures:
+#  - wasm-pack test --firefox --headless
   - wasm-pack test --chrome  --headless
