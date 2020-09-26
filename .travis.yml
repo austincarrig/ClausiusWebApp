@@ -14,10 +14,14 @@ jobs:
       script: cargo build
     - stage: "Test"
       name: "Cargo Tests"
+      language: rust
+      rust: nightly
       script: cargo test
     - name: "Chrome Tests"
+      language: rust
+      rust: nightly
       script: wasm-pack test --chrome  --headless
-    - name: "Firefox Tests"
-      script: wasm-pack test --firefox --headless
-  allow_failures:
-    - name: "Firefox Tests"
+    #- name: "Firefox Tests"
+      #language: rust
+      #rust: nightly
+      #script: wasm-pack test --firefox --headless
