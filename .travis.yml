@@ -8,11 +8,16 @@ addons:
 install:
   - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
-script:
-
-  # this will test the non wasm targets if your crate has those, otherwise remove this line.
-  #
-  - cargo build
-  - cargo test
-#  - wasm-pack test --firefox --headless
-  - wasm-pack test --chrome  --headless
+jobs:
+  include:
+    - stage: "Build"
+      script: cargo build
+    - stage: "Test"
+      name: "Cargo Tests"
+      script: cargo test
+    - name: "Chrome Tests"
+      script: wasm-pack test --chrome  --headless
+    - name: "Firefox Tests"
+      script: wasm-pack test --firefox --headless
+  allow_failures:
+    - name: "Firefox Tests"
