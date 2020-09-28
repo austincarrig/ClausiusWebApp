@@ -29,6 +29,8 @@ const chartTypes = {
     Pv: "pv"
 };
 
+console.log(TS_CHART_LINE[0])
+
 let curChartType = chartTypes.Ts;
 
 function initialization() {
@@ -92,16 +94,19 @@ function TouchRegistered(res, event) {
     currX = (event.clientX - canvas.getBoundingClientRect().left);
     currY = (event.clientY - canvas.getBoundingClientRect().top);
 
+    if (currY < 0) {
+        currY = 0;
+    }
+
     currX = ClampX();
 
     // when the user clicks...
     if (res == 'down') {
-        console.log(currY)
         // resize the canvas to ensure that our scale isn't off...
         resizeCanvas();
 
         // update the display with calculated values...
-        //UpdateDisplayView();
+        UpdateDisplayView();
         
         // draw the large indicator...
         DrawLargeIndicator();
@@ -116,9 +121,8 @@ function TouchRegistered(res, event) {
     if (res == 'move') {
         // if the mouse button is being pressed...
         if (touchPresent) {
-            console.log(currY)
             // update the display with calculated values...
-            //UpdateDisplayView();
+            UpdateDisplayView();
             
             // draw the large indicator...
             DrawLargeIndicator();
@@ -130,7 +134,6 @@ function TouchRegistered(res, event) {
     if (res == 'up' || res == "out") {
         // if the mouse is/was just being pressed...
         if (touchPresent) {
-            console.log(currY)
             // draw the small indicator
             DrawSmallIndicator();
 
@@ -144,8 +147,8 @@ function TouchRegistered(res, event) {
 
 function ClampX() {
     let y = currY / canvas.getBoundingClientRect().height;
-    let x = (-0.24796 * y * y - 0.342233 * y + 0.605351)
-            * canvas.getBoundingClientRect().width;
+    let x = TS_CHART_LINE[Math.trunc(y*TS_CHART_LINE.length)]
+          * canvas.getBoundingClientRect().width + 5;
     if (currX > x)
     {
         return currX
