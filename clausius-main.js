@@ -23,6 +23,16 @@ var canvas, canvasBorder, _ctx, touchPresent = false,
     prevY = 0,
     currY = 0;
 
+const chartTypes = {
+    Ts: "ts",
+    Ph: "ph",
+    Pv: "pv"
+};
+
+console.log(TS_CHART_LINE[0])
+
+let curChartType = chartTypes.Ts;
+
 function initialization() {
     canvas = document.querySelector("#canvas")
     canvasBorder = document.querySelector("#canvas-border")
@@ -84,6 +94,12 @@ function TouchRegistered(res, event) {
     currX = (event.clientX - canvas.getBoundingClientRect().left);
     currY = (event.clientY - canvas.getBoundingClientRect().top);
 
+    if (currY < 0) {
+        currY = 0;
+    }
+
+    currX = ClampX();
+
     // when the user clicks...
     if (res == 'down') {
         // resize the canvas to ensure that our scale isn't off...
@@ -126,6 +142,20 @@ function TouchRegistered(res, event) {
 
             canvas.classList.remove("hide-cursor")
         }
+    }
+}
+
+function ClampX() {
+    let y = currY / canvas.getBoundingClientRect().height;
+    let x = TS_CHART_LINE[Math.trunc(y*TS_CHART_LINE.length)]
+          * canvas.getBoundingClientRect().width + 5;
+    if (currX > x)
+    {
+        return currX
+    }
+    else
+    {
+        return x
     }
 }
 
