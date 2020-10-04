@@ -20,16 +20,16 @@ const orangeColor = "#ffa500"
 var canvas, canvasBorder, _ctx, touchPresent = false,
     prevX = 0,
     currX = 0,
+    actCurrX = 0,
     prevY = 0,
-    currY = 0;
+    currY = 0,
+    actCurrY = 0;
 
 const chartTypes = {
     Ts: "ts",
     Ph: "ph",
     Pv: "pv"
 };
-
-console.log(TS_CHART_LINE[0])
 
 let curChartType = chartTypes.Ts;
 
@@ -93,6 +93,9 @@ function TouchRegistered(res, event) {
     // of the canvas
     currX = (event.clientX - canvas.getBoundingClientRect().left);
     currY = (event.clientY - canvas.getBoundingClientRect().top);
+
+    actCurrX = currX;
+    actCurrY = currY;
 
     if (currY < 0) {
         currY = 0;
@@ -192,6 +195,8 @@ function DrawLargeIndicator() {
     // ... an inner circle...
     DrawInnerCircle(_ctx);
 
+    DrawGhost(_ctx);
+
     // ... a large ring...
     DrawRing(_ctx,
              LargeOuterRadius,
@@ -289,6 +294,20 @@ function DrawLine(ctx,
     ctx.strokeStyle = orangeColor
     ctx.lineWidth = HitmarkerLineWidth
     ctx.stroke()
+    ctx.closePath()
+}
+
+function DrawGhost(ctx) {
+    ctx.beginPath()
+    ctx.arc(
+        actCurrX,
+        actCurrY,
+        InnerRadius / 2.0,
+        0,
+        2 * Math.PI
+    )
+    ctx.fillStyle = "rgba(255, 165, 0, 0.3)";
+    ctx.fill()
     ctx.closePath()
 }
 
