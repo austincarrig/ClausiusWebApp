@@ -25,5 +25,5 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
     - name: Run WebAssembly Tests
-      run: wasm-pack test --firefox --chrome --headless
+      run: wasm-pack test --chrome --headless
       
