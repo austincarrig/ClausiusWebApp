@@ -7,87 +7,85 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Google Font -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet"> 
-        <!-- Bootstrap CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-        crossorigin="anonymous">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="./clausius-main.css">
+        <link rel="stylesheet" href="assets/css/clausius-main.css">
     </head>
     <body>
-        <div id="main">
-            <div class="canvas faded-corner-border d-none d-lg-block" id="canvas-border">
-                <canvas class="canvas" id="canvas"></canvas>
-            </div>
-            <div class="data-table">
-                <h1>Water</h1>
-                <table>
-                    <!--
-                        16*
-                        11*
-                        35*
-                        9*
-                        29*
-                    -->
-                    <tr id="temperature">
-                        <td class="row-name">T</td>
-                        <td class="row-spacing1"></td>
-                        <td class="row-value">0.0</td>
-                        <td class="row-spacing2"></td>
-                        <td class="row-units">°C</td>
-                    </tr>
-                    <tr id="pressure" class="table-divider">
-                        <td class="row-name">P</td>
-                        <td class="row-spacing1"></td>
-                        <td class="row-value">0.0</td>
-                        <td class="row-spacing2"></td>
-                        <td class="row-units">kPa</td>
-                    </tr>
-                    <tr id="specVol" class="table-divider">
-                        <td class="row-name">v</td>
-                        <td class="row-spacing1"></td>
-                        <td class="row-value">0.0</td>
-                        <td class="row-spacing2"></td>
-                        <td class="row-units">m³/kg</td>
-                    </tr>
-                    <tr id="intEnergy" class="table-divider">
-                        <td class="row-name">u</td>
-                        <td class="row-spacing1"></td>
-                        <td class="row-value">0.0</td>
-                        <td class="row-spacing2"></td>
-                        <td class="row-units">kJ/kg</td>
-                    </tr>
-                    <tr id="enthalpy" class="table-divider">
-                        <td class="row-name">h</td>
-                        <td class="row-spacing1"></td>
-                        <td class="row-value">0.0</td>
-                        <td class="row-spacing2"></td>
-                        <td class="row-units">kJ/kg</td>
-                    </tr>
-                    <tr id="entropy" class="table-divider">
-                        <td class="row-name">s</td>
-                        <td class="row-spacing1"></td>
-                        <td class="row-value">0.0</td>
-                        <td class="row-spacing2"></td>
-                        <td class="row-units">kJ/kg.K</td>
-                    </tr>
-                    <tr id="quality" class="table-divider">
-                        <td class="row-name">x</td>
-                        <td class="row-spacing1"></td>
-                        <td class="row-value">0.0</td>
-                        <td class="row-spacing2"></td>
-                        <td class="row-units">%</td>
-                    </tr>
-                </table>
+        <div id="clausius-main">
+            <div class="faded-corner-border" id="canvas-border">
+                <canvas id="canvas"></canvas>
+                <div id="data-table-container">
+                    <h2>Screen is too small to use the web app.</h2>
+                    <div class="data-table noselect">
+                        <h1>Water</h1>
+                        <table>
+                            <!--
+                                16*
+                                11*
+                                35*
+                                9*
+                                29* 
+                            -->
+                            <tr id="temperature">
+                                <td class="row-name">T</td>
+                                <td class="row-spacing1"></td>
+                                <td class="row-value">0.0</td>
+                                <td class="row-spacing2"></td>
+                                <td class="row-units">°C</td>
+                            </tr>
+                            <tr id="pressure" class="table-divider">
+                                <td class="row-name">P</td>
+                                <td class="row-spacing1"></td>
+                                <td class="row-value">0.0</td>
+                                <td class="row-spacing2"></td>
+                                <td class="row-units">kPa</td>
+                            </tr>
+                            <tr id="specVol" class="table-divider">
+                                <td class="row-name">v</td>
+                                <td class="row-spacing1"></td>
+                                <td class="row-value">0.0</td>
+                                <td class="row-spacing2"></td>
+                                <td class="row-units">m³/kg</td>
+                            </tr>
+                            <tr id="intEnergy" class="table-divider">
+                                <td class="row-name">u</td>
+                                <td class="row-spacing1"></td>
+                                <td class="row-value">0.0</td>
+                                <td class="row-spacing2"></td>
+                                <td class="row-units">kJ/kg</td>
+                            </tr>
+                            <tr id="enthalpy" class="table-divider">
+                                <td class="row-name">h</td>
+                                <td class="row-spacing1"></td>
+                                <td class="row-value">0.0</td>
+                                <td class="row-spacing2"></td>
+                                <td class="row-units">kJ/kg</td>
+                            </tr>
+                            <tr id="entropy" class="table-divider">
+                                <td class="row-name">s</td>
+                                <td class="row-spacing1"></td>
+                                <td class="row-value">0.0</td>
+                                <td class="row-spacing2"></td>
+                                <td class="row-units">kJ/kg.K</td>
+                            </tr>
+                            <tr id="quality" class="table-divider">
+                                <td class="row-name">x</td>
+                                <td class="row-spacing1"></td>
+                                <td class="row-value">0.0</td>
+                                <td class="row-spacing2"></td>
+                                <td class="row-units">%</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <script type="text/javascript" src="./chartLines.js"></script>
+        <script type="text/javascript" src="assets/js/chartLines.js"></script>
 
-        <script type="module" src="./clausius-main.js"></script>
+        <script type="module" src="assets/js/clausius-main.js"></script>
     </body>
 </html>
