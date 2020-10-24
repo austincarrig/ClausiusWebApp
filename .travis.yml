@@ -21,7 +21,7 @@ jobs:
       language: rust
       rust: nightly
       script: wasm-pack test --chrome  --headless
-    #- name: "Firefox Tests"
-      #language: rust
-      #rust: nightly
-      #script: wasm-pack test --firefox --headless
+    - name: "Firefox Tests"
+      language: rust
+      rust: nightly
+      script: wasm-pack test --firefox --headless

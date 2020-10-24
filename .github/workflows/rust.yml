@@ -25,5 +25,6 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
     - name: Run WebAssembly Tests
-      run: wasm-pack test --chrome --headless
+      run: RUST_LOG=DEBUG wasm-pack test --chrome --headless
+      run: RUST_LOG=DEBUG wasm-pack test --firefox --headless
       
