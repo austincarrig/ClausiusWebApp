@@ -1,0 +1,20 @@
+INSTRUCTIONS:
+
+1. Copy the images in the "images" folder into your "images" folder on your site.
+
+2. Copy the css file and the js file in the assets/css and assets/js folders into your corresponding folders.
+
+3. Copy the entire pkg/ directory into your area, at the same level as the images/ and assets/ folders.
+
+4. Copy the appropriate code from the clausius-main.html file into your site.
+
+    a. You must copy lines 11 (font) and 13 (CSS file link) into the <head> of your html file
+
+    b. You must copy lines 87 and 89 (javascript) to the bottom of the <body> section
+        NOTE: It is ESSENTIAL that these lines are copied exactly, and in the correct order (chartLines first, clausius-main second)
+
+    c. You may copy lines 17-85 (id="clausius-main" div and everything contained inside) wherever in your HTML file you'd like it
+        NOTE: I'd recommend you place it at the same level you'd place an image. That's the level I tested it at.
+              Otherwise, it may act odd if another element is trying to affect its style.
+
+GOOD LUCK!
