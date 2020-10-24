@@ -1,0 +1,204 @@
+#clausius-main {
+    padding: 0;
+    margin: 0;
+    padding-bottom: 34.6667px;
+    position: relative;
+}
+
+.faded-corner-border {
+    padding: 2px;
+    background: linear-gradient(135deg, rgba(255,165,0,.8), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(255,165,0,.8) 100%),
+                linear-gradient(225deg, rgba(255,165,0,.8), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(255,165,0,.8) 100%);
+}
+
+#canvas {
+    background: white;
+    background-image: url("../../images/Water_ts_chart.png"); /* 2975 x 2227 */
+    background-size: cover;
+    position: absolute;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    image-rendering: auto;
+}
+
+.hide-cursor {
+    cursor: none;
+}
+
+.hidden {
+    display: none;
+}
+
+/*
+sm: 576px
+md: 768px
+lg: 992px
+xl: 1200px
+*/
+@media (max-width: 1096px) {
+    #clausius-main {
+        width: 100%;
+        padding-top: 75%;
+    }
+
+    #canvas-border {
+        margin: 0 0;
+        padding: 2px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        position: absolute;
+        margin-bottom: 34.6667px;
+    }
+
+    #data-table-container {
+        background-color: #0005;
+        -webkit-transition: background-color 100ms linear;
+        -ms-transition: background-color 100ms linear;
+        transition: background-color 100ms linear;
+    }
+
+    .data-table {
+        display: none;
+    }
+}
+
+@media (min-width: 1096px) {
+    #canvas-border {
+        width: 992px; /* original: 1000px */
+        height: 744px; /* original: 750px */
+        margin: 0 auto;
+    }
+
+    #canvas {
+        width: 988px;
+        height: 740px;
+    }
+
+    #data-table-container > h2 {
+        display: none;
+    }
+}
+/*
+@media (min-width: 1664px) {
+    #canvas-border {
+        width: 1190px;
+        height: 894px;
+        margin: 0 auto;
+    }
+
+    #canvas {
+        width: 1186px;
+        height: 890px;
+    }
+}
+*/
+/* Lay out CSS for the displayView table */
+
+#data-table-container {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+#data-table-container > h2 {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-transform: none;
+    text-align: center;
+}
+
+.data-table {
+    font-family: 'Roboto', sans-serif;
+    width: 250px;
+    margin: 10px;
+    pointer-events: none; /* touch will pass through data table */
+    position: absolute;
+    top: 18px;
+    left: 18px;
+}
+
+table {
+    border-collapse: collapse; /* taken from bootstrap */
+    position: relative;
+    width: 250px;
+}
+
+.data-table > h1 {
+    text-align: center;
+    color: #0008;
+    font-size: 90px;
+    font-weight: 100;
+    margin-top: 0; /* taken from bootstrap */
+    margin-bottom: 0;
+    line-height: 1.2;
+    text-transform: none;
+}
+
+.data-table > table > tbody > tr {
+    height: 36px;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    line-height: 1.5; /* taken from bootstrap */
+}
+
+.data-table > table > tbody > tr.table-divider {
+    height: 38px;
+    border-top: 2px solid #ffa500;
+}
+
+.data-table > table > tbody > tr > td {
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.5; /* taken from bootstrap */
+    vertical-align: middle;
+}
+
+td.row-name {
+    text-align: center;
+    width: 14%;
+}
+
+td.row-spacing1 {
+    width: 9%;
+}
+
+td.row-value {
+    width: 35%;
+}
+
+td.row-spacing2 {
+    width: 7%;
+}
+
+td.row-units {
+    width: 35%;
+}
+
+/* taken from bootstrap */
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }

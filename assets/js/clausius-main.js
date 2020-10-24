@@ -1,9 +1,9 @@
-import wasmInit from "./pkg/exports.js";
-import * as wasm from "./pkg/exports.js";
+import wasmInit from "../../pkg/exports.js";
+import * as wasm from "../../pkg/exports.js";
 
 const runWasm = async () => {
   // Instantiate our wasm module
-  const rustWasm = await wasmInit("./pkg/exports_bg.wasm");
+  const rustWasm = await wasmInit("../../pkg/exports_bg.wasm");
 };
 runWasm();
 
@@ -17,7 +17,7 @@ const HitmarkerLineWidth = 1.0;
 
 const orangeColor = "#ffa500"
 
-var canvas, canvasBorder, _ctx, touchPresent = false,
+var canvas, _ctx, touchPresent = false,
     prevX = 0,
     currX = 0,
     actCurrX = 0,
@@ -34,8 +34,7 @@ const chartTypes = {
 let curChartType = chartTypes.Ts;
 
 function initialization() {
-    canvas = document.querySelector("#canvas")
-    canvasBorder = document.querySelector("#canvas-border")
+    canvas = document.getElementById("canvas")
 
     _ctx = canvas.getContext("2d");
 
@@ -69,10 +68,34 @@ function initialization() {
 }
 
 function resizeCanvasBorder() {
-    const innerWidth = document.querySelector("#canvas-border").scrollWidth;
+    var dataTableContainer = document.getElementById("data-table-container")
 
-    canvasBorder.style.maxHeight = (innerWidth * 0.75) + "px";
-    canvasBorder.style.maxWidth  = innerWidth + "px";
+    if (window.innerWidth < 1096)
+    {
+        var canvasBorderStyle = getComputedStyle(document.getElementById("canvas-border"))
+
+        const height = (parseFloat(canvasBorderStyle.height)
+                        - (parseFloat(canvasBorderStyle.paddingTop)
+                        + parseFloat(canvasBorderStyle.paddingBottom))) + "px";
+        
+        const width  = (parseFloat(canvasBorderStyle.width)
+                        - (parseFloat(canvasBorderStyle.paddingLeft)
+                        + parseFloat(canvasBorderStyle.paddingRight))) + "px";
+
+        canvas.style.height = height
+        canvas.style.width  = width
+
+        dataTableContainer.style.height = height
+        dataTableContainer.style.width  = width
+    }
+    else
+    {
+        canvas.style.height = ""
+        canvas.style.width = ""
+
+        dataTableContainer.style.height = ""
+        dataTableContainer.style.width = ""
+    }
     resizeCanvas()
 }
 
