@@ -20,6 +20,15 @@ fn superheated_point_1()
                SUPERHEATED_POINT_1_D);
 }
 
+#[test]
+#[wasm_bindgen_test]
+fn superheated_point_2()
+{
+    let calc = H2OWagnerPruss::calculate_density(599.62558, 34.2);
+    println!("Supeheated Point 2 Caluclated Density: {}", calc);
+    assert!(calc > 0.0);
+}
+
 fn test_delta(temperature: f32,
               pressure: f32,
               test_value: f32)

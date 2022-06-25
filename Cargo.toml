@@ -1,5 +1,5 @@
 [package]
-name = "exports"
+name = "clausius"
 version = "0.1.0"
 authors = ["Austin Carrig <austincarrig.raspi@gmail.com>"]
 edition = "2018"
